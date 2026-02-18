@@ -1,7 +1,10 @@
+const axios = require('axios');
+const { ExpressError } = require('../utils/ExpressError')
+
 module.exports.TTS = async (req, res) => {
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/tts",
+      "http://0.0.0.0:7860/tts",
         req.body,
       { responseType: "arraybuffer" }
     ).catch((err) => {
@@ -11,5 +14,4 @@ module.exports.TTS = async (req, res) => {
 
     res.set("Content-Type", "audio/wav");
     res.send(response.data);
-
 }

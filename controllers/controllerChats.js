@@ -5,7 +5,6 @@ const { User, Conversation } = require('../DataBase/Schema')
 const prompt = require('../utils/prompt')
 
 
-
 module.exports.Msg = async(req,res)=>{
 
     const { msg } = req.query;
@@ -25,9 +24,9 @@ module.exports.Msg = async(req,res)=>{
         chat = new Conversation({ messages: [] });
         const titlePrompt = `Give me a short and clear title (max 4 words) for this chat message: ${msg}`;
         const titleResponse = await axios.post(
-            "https://api.groq.com/openai/v1/chat/completions",
+            process.env.OPENROUTER_URL,
             {
-                model: "meta-llama/llama-4-scout-17b-16e-instruct",
+                model: process.env.MODLE_NAME,
                 messages: [
                     { role: "system", content: "You are a helpful assistant that writes concise chat titles." },
                     { role: "user", content: titlePrompt }
@@ -68,9 +67,9 @@ module.exports.Msg = async(req,res)=>{
     ];
 
     const aiResponse = await axios.post(
-        "https://api.groq.com/openai/v1/chat/completions",
+        process.env.OPENROUTER_URL,
         {
-            model: "meta-llama/llama-4-scout-17b-16e-instruct",
+            model: process.env.MODLE_NAME,
             messages: messages,
         },
         {
