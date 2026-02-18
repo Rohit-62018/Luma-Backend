@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://127.0.0.1:27017/luma')
+const url = "mongodb+srv://rohitkumargiddi:ryfwor-goznUz-0xutje@cluster0.fjlwgtf.mongodb.net/?appName=Cluster0"
+mongoose.connect(url)
   .then(() => console.log('Database Connected!'))
   .catch((error)=>console.log("Mongoose connection fail",error));
